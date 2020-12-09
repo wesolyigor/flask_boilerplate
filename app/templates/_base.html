@@ -9,7 +9,16 @@
 </head>
 <body>
 
+<nav>
+
+    <a href="{{ url_for('auth.login') }}">Log In</a>
+    <a href="{{ url_for('auth.signup') }}">Sign up</a>
+    <a href="{{ url_for('auth.signup') }}">Home</a>
+
+</nav>
+
 {% block content %}
+
 
 {% endblock %}
 </body>
