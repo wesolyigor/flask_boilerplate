@@ -5,21 +5,38 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Base</title>
+    <title>Home</title>
 </head>
 <body>
 
 <nav>
-
-    <a href="{{ url_for('auth.login') }}">Log In</a>
+    <a href="{{ url_for('main.home') }}">Home</a>
+    <a href="{{ url_for('auth.logout') }}">Log out</a>
     <a href="{{ url_for('auth.signup') }}">Sign up</a>
-    <a href="{{ url_for('auth.signup') }}">Home</a>
+    <a href="{{ url_for('auth.login') }}">Log In</a>
 
 </nav>
+
+
 
 {% block content %}
 
 
+
+
 {% endblock %}
+
+<article class="flashes">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes-box">
+        {% for message in messages %}
+            <h3>{{ message }}</h3>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+</article>
 </body>
 </html>
