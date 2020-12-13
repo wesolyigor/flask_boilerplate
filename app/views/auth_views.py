@@ -40,3 +40,4 @@ def logout():
     logout_user()
     flash(f'Logged out!')
     return redirect(url_for('main.home'))
+
