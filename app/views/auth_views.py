@@ -16,7 +16,7 @@ def login():
         user = User.get_by_username(form.username.data)
         if user is not None and user.check_password(form.password.data):
             login_user(user)
-            flash(f'You are logged in!')
+            flash(f'You are logged in!', 'success')
             return redirect(request.args.get('next') or url_for('main.home'))
     return render_template('login.html', form=form)
 
@@ -30,7 +30,7 @@ def signup():
         db.session.add(user)
         db.session.commit()
 
-        flash(f'Hello {user.username}! Please login')
+        flash(f'Hello {user.username}! Please login', 'info')
         return redirect(url_for('auth.login'))
     return render_template('signup.html', form=form)
 
@@ -38,7 +38,7 @@ def signup():
 @bp_auth.route('/logout')
 def logout():
     logout_user()
-    flash(f'Logged out!')
+    flash(f'Logged out!', 'warning')
     return redirect(url_for('main.home'))
 
 

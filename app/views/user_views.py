@@ -25,10 +25,10 @@ def change_password():
         if user.check_password(form.old_password.data):
             user.password = form.new_password.data
             db.session.commit()
-            flash(f"Password successfully changed.")
+            flash(f"Password successfully changed.", 'success')
             return redirect(url_for('user.user', username=current_user.username))
         else:
-            flash(f"Current password is incorrect.")
+            flash(f"Current password is incorrect.", 'danger')
     return render_template('change_password.html', form=form)
 
 
@@ -41,6 +41,6 @@ def delete_user():
         if request.method == 'POST':
             db.session.delete(user)
             db.session.commit()
-            flash(f'Deleted {user.username}')
+            flash(f'Deleted {user.username}', 'warning')
             return redirect(url_for('main.home'))
     return render_template('delete_user.html', delete_user=delete_user, form=form)

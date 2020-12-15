@@ -7,128 +7,59 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css.map') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
 
-    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+    {% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% endblock %}
 
 
 </head>
 <body>
-<main>
-    <nav>
+
+{% include '_header.html' %}
 
 
+<main class="container">
 
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fifth navbar example">
-            <a href="{{ url_for('main.home') }}" class="navbar-brand">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" width="70">
-            </a>
+    {% include '_flash.html' %}
 
-
-            <div class="btn-group">
-                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                        data-bs-display="static" aria-expanded="false">
-                    Menu
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-                    <li>
-                        <button class="dropdown-item" type="button">Action</button>
-                    </li>
-                    <li>
-                        <button class="dropdown-item" type="button">Another action</button>
-                    </li>
-                    <li>
-                        <button class="dropdown-item" type="button">Something else here</button>
-                    </li>
-                </ul>
-            </div>
-
-
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url_for('main.home') }}">Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarsExample05">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-
-
-                        {% block navbar %}
-                        {% if current_user.is_authenticated %}
-
-                        <li class="nav-item active">
-                            <a class="nav-link" aria-current="page"
-                               href="{{ url_for('user.user', username=current_user.username) }}">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.logout') }}">Log out</a>
-                        </li>
-
-                        {% else %}
-
-                        <li class="nav-item active">
-                            <a class="nav-link" aria-current="page" href="{{ url_for('auth.signup') }}">Sign up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.login') }}">Log In</a>
-                        </li>
-
-
-                        {% endif %}
-
-                    </ul>
-                    <form>
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
-
-    </nav>
-    {% endblock %}
-</main>
-
-<div class="container">
     <div class="row">
-        {% block content %}
+        <div class="col-9">
+
+            {% block content %}
+
+            {% endblock %}
+
+        </div>
+    </div>
+
+    <div class="col-3">
+        {% block aside %}
 
         {% endblock %}
     </div>
 
+</main>
 
-    <article class="flashes">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul class="flashes-box">
-            {% for message in messages %}
-            <h3>{{ message }}</h3>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-    </article>
-
-    <div class="navbar fixed-bottom"></div>
-
-<footer class="text-muted py-5" >
+{% include '_footer.html' %}
 
 
-        <div class="container"><p class="float-end mb-1">
-      <a href="#">Back to top</a>
-    </p>
-    <p class="mb-1">Example is &copy; Lorem ipsum dolor sit amet, consectetur adipiscing elit!</p>
-    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit <a href="/">Lorem ipsum dolor</a> or lorem <a href="">Lorem ipsum dolor</a>.</p>
-  </div></div>
-</footer>
+{% block script %}
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+
+
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+
+{% endblock %}
+
 
 </body>
 </html>

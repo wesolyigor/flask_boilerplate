@@ -1,0 +1,18 @@
+.logo {
+    width: 100%;
+    max-width: 100px;
+    height: auto;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+.main-header {
+    width: 100%;
+}
+.main-footer {
+    align-self: flex-end;
+}
