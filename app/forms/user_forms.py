@@ -34,3 +34,15 @@ class SignUpForm(FlaskForm):
     # validatory muszą się w ten sposób nazywać validate_nazwaformularza(inaczej nie będą działąć)
     # self jest dlatego, że te medoty są wykorzystywane też jako metody obiektu
 
+
+class ChangePasswordForm(FlaskForm):
+    old_password = PasswordField('Current Password: ', validators=[DataRequired()])
+    new_password = PasswordField('New Password: ', validators=[DataRequired()])
+    new_password2 = PasswordField('Repeat New Password: ',
+                                  validators=[DataRequired(), EqualTo('new_password', message='Passwords must match.')])
+    submit = SubmitField('Submit')
+
+
+class DeleteUserForm(FlaskForm):
+    password = PasswordField('Password:', validators=[DataRequired()])
+    submit = SubmitField('Delete your account')

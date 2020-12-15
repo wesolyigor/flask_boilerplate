@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, flash, request, url_for
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.utils import redirect
 
 from app import db
@@ -40,4 +40,5 @@ def logout():
     logout_user()
     flash(f'Logged out!')
     return redirect(url_for('main.home'))
+
 

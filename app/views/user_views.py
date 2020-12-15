@@ -1,6 +1,9 @@
-from flask import Blueprint, render_template
-from flask_login import current_user
+from flask import Blueprint, render_template, flash, url_for, request
+from flask_login import current_user, login_required
+from werkzeug.utils import redirect
 
+from app import db
+from app.forms.user_forms import ChangePasswordForm, DeleteUserForm
 from app.models.user_models import User
 
 bp_user = Blueprint('user', __name__, url_prefix='/user')
@@ -10,3 +13,34 @@ bp_user = Blueprint('user', __name__, url_prefix='/user')
 def user(username):
     user = User.query.filter_by(username=current_user.username).first_or_404()
     return render_template('user.html', user=user)
+
+
+
+@bp_user.route('/change_password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        user = User.get_by_username(current_user.username)
+        if user.check_password(form.old_password.data):
+            user.password = form.new_password.data
+            db.session.commit()
+            flash(f"Password successfully changed.")
+            return redirect(url_for('user.user', username=current_user.username))
+        else:
+            flash(f"Current password is incorrect.")
+    return render_template('change_password.html', form=form)
+
+
+@bp_user.route('/delete_user/', methods=['GET', 'POST'])
+@login_required
+def delete_user():
+    form = DeleteUserForm()
+    user = User.get_by_username(current_user.username)
+    if form.validate_on_submit():
+        if request.method == 'POST':
+            db.session.delete(user)
+            db.session.commit()
+            flash(f'Deleted {user.username}')
+            return redirect(url_for('main.home'))
+    return render_template('delete_user.html', delete_user=delete_user, form=form)

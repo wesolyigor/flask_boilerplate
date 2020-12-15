@@ -5,8 +5,16 @@
 <article>
         <h1>Your Profile:</h1>
         <b>Username: </b>{{ current_user.username }}<br>
+        <a href="{{ url_for('user.change_password', username=current_user.username) }}">Change password</a><br>
         <b>E-mail address: </b>{{ current_user.email }}<br><br>
+        <a href="{{ url_for('user.delete_user', username=current_user.username) }}">Delete user</a><br>
+
 </article>
+
+
+
+
+
 {% endblock %}
 
 
