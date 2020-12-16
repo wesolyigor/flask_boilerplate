@@ -3,20 +3,10 @@
 
 {% block content %}
 
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    {{ form.username.label() }}
-        {{ form.username() }}
-    {{ form.email.label() }}
-        {{ form.email() }}
-    {{ form.password.label() }}
-        {{ form.password() }}
-    {{ form.password2.label() }}
-        {{ form.password2() }}
-    {{ form.submit() }}
+<div class="col-6">
+    {% include '_form.html' %}
 
-
-</form>
+</div>
 
 
 {% endblock %}

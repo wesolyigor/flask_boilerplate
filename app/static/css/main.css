@@ -15,4 +15,13 @@ body {
 }
 .main-footer {
     align-self: flex-end;
+    clear: both;
+}
+
+.custom-btn {
+    float: right;
+}
+
+.custom-form {
+    padding: 15px;
 }

@@ -12,13 +12,15 @@ bp_user = Blueprint('user', __name__, url_prefix='/user')
 @bp_user.route('/<username>')
 def user(username):
     user = User.query.filter_by(username=current_user.username).first_or_404()
-    return render_template('user.html', user=user)
-
+    form = DeleteUserForm()
+    return render_template('user.html', user=user, form=form)
 
 
 @bp_user.route('/change_password', methods=['GET', 'POST'])
 @login_required
 def change_password():
+    # if current_user != User.get_by_username(username):
+
     form = ChangePasswordForm()
     if form.validate_on_submit():
         user = User.get_by_username(current_user.username)
@@ -32,7 +34,7 @@ def change_password():
     return render_template('change_password.html', form=form)
 
 
-@bp_user.route('/delete_user/', methods=['GET', 'POST'])
+@bp_user.route('/delete_user/', methods=['POST'])
 @login_required
 def delete_user():
     form = DeleteUserForm()
@@ -43,4 +45,7 @@ def delete_user():
             db.session.commit()
             flash(f'Deleted {user.username}', 'warning')
             return redirect(url_for('main.home'))
-    return render_template('delete_user.html', delete_user=delete_user, form=form)
+    flash('Wrong password', 'danger')
+    return redirect(url_for('user.user', username=current_user.username))
+
+# todo zrobię formularz do kukizów

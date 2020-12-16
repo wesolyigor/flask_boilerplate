@@ -1,18 +1,37 @@
 {% extends '_base.html' %}
 
+{% set modal_id='deleteModalForm' %}
+{% set btn_id='deleteForm' %}
+
+
 {% block content %}
 
 <article>
         <h1>Your Profile:</h1>
-        <b>Username: </b>{{ current_user.username }}<br>
-        <a href="{{ url_for('user.change_password', username=current_user.username) }}">Change password</a><br>
-        <b>E-mail address: </b>{{ current_user.email }}<br><br>
-        <a href="{{ url_for('user.delete_user', username=current_user.username) }}">Delete user</a><br>
+        <b>Username: </b>{{ current_user.username }}
+        <b>E-mail address: </b>{{ current_user.email }}
+        <a class="btn btn-primary" href="{{ url_for('user.change_password', username=current_user.username) }}">Change password</a>
+        <button class="btn btn-danger" id="{{ btn_id }}" data-target="#{{ modal_id }}" data-toggle="modal">Delete user</button>
 
 </article>
 
+{% include '_modal_form.html' %}
 
 
+
+{% endblock %}
+
+{% block script %}
+
+{{ super() }}
+
+<script>
+
+        $('#{{ modal_id }}').on('shown.bs.modal', function () {
+                $('#{{ btn_id }}').trigger('focus')
+        })
+
+</script>
 
 
 {% endblock %}
