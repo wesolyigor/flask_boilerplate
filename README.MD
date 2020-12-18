@@ -3,7 +3,6 @@ There you can find simply and fully reusable templates for every kind of flask p
 
 to start:
 
-
 mkdir _namedirection_
 
 git checkout _actualbranch_
