@@ -12,7 +12,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cookie.css') }}">
     {% endblock %}
+
+    {% include '_cookie.html' %}
 
 
 </head>
@@ -57,6 +60,9 @@
 
 
 <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/cookie.js') }}"></script>
+
+
 
 {% endblock %}
 
