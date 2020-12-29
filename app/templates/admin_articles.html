@@ -1,0 +1,52 @@
+{% extends '_base_admin.html' %}
+
+
+{% set modal_id='articleModalForm' %}
+{% set btn_id='addForm' %}
+{% set form_title='Add Article' %}
+
+{% block maincontent %}
+
+
+<button class="btn btn-primary" id="{{ btn_id }}" data-target="#{{ modal_id }}" data-toggle="modal">Add article</button>
+
+{% if articles.count() > 0 %}
+
+  {% for article in articles %}
+
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+    <h5 class="card-title">{{ article.title }}</h5>
+    <p class="card-text">{{ article.lead }}</p>
+    <a href="{{  url_for('admin.edit_article', article_id=article.id) }}" class="btn btn-primary">Edit</a>
+    <a href="{{  url_for('admin.delete_article', article_id=article.id) }}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+
+
+  {% endfor %}
+
+{% else %}
+
+  <h3>There's no articles. Sorry!</h3>
+
+{% endif %}
+
+{% include '_modal_form.html' %}
+
+{% endblock %}
+
+{% block script %}
+
+{{ super() }}
+
+<script>
+
+        $('#{{ modal_id }}').on('shown.bs.modal', function () {
+                $('#{{ btn_id }}').trigger('focus')
+        })
+
+</script>
+
+
+{% endblock %}

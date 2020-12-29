@@ -1,0 +1,15 @@
+{% extends '_base.html' %}
+
+
+{% block content %}
+
+<article>
+
+    <h1>{{ article.title }}</h1>
+    <small>{{ article.created }}, {{ article.author }}, {{ article.watcher }}</small>
+    <h2>{{ article.lead }}</h2>
+    <p>{{ article.text }}</p>
+
+</article>
+
+{% endblock %}

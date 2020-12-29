@@ -19,10 +19,14 @@ def create_app():
     from app.views.main_views import bp_main
     from app.views.auth_views import bp_auth
     from app.views.user_views import bp_user
+    from app.views.article_views import bp_article
+    from app.views.admin_views import bp_admin
 
     app.register_blueprint(bp_main)
     app.register_blueprint(bp_auth)
     app.register_blueprint(bp_user)
+    app.register_blueprint(bp_article)
+    app.register_blueprint(bp_admin)
 
     login_manager.session_protection = "strong"
     login_manager.login_view = "auth.login"

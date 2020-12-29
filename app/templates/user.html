@@ -2,6 +2,7 @@
 
 {% set modal_id='deleteModalForm' %}
 {% set btn_id='deleteForm' %}
+{% set form_title='Confirm User Delete' %}
 
 
 {% block content %}
@@ -14,9 +15,9 @@
         <button class="btn btn-danger" id="{{ btn_id }}" data-target="#{{ modal_id }}" data-toggle="modal">Delete user</button>
 
 </article>
-
+{% with action = url_for("user.delete_user", username=user.username) %}
 {% include '_modal_form.html' %}
-
+{% endwith %}
 
 
 {% endblock %}

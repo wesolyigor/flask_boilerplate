@@ -15,7 +15,7 @@
     }
 
     acceptCookies.addEventListener("click", function () {
-        setCookie("acceptCookies", true, 365);
+        setCookie("acceptCookies", true, 30);
         cookieAlert.classList.remove("show");
 
         window.dispatchEvent(new Event("cookieAlertAccept"))

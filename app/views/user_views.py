@@ -48,4 +48,3 @@ def delete_user():
     flash('Wrong password', 'danger')
     return redirect(url_for('user.user', username=current_user.username))
 
-# todo zrobię formularz do kukizów

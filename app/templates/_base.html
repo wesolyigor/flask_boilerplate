@@ -15,13 +15,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cookie.css') }}">
     {% endblock %}
 
-    {% include '_cookie.html' %}
 
 
 </head>
 <body>
 
+{% block mainnav %}
+
 {% include '_header.html' %}
+
+{% endblock %}
 
 
 <main class="container">
@@ -48,6 +51,7 @@
 
 {% include '_footer.html' %}
 
+{% include '_cookie.html' %}
 
 {% block script %}
 
