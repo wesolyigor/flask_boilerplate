@@ -1,12 +1,21 @@
-This is Flask Boilerplate. 
-There you can find simply and fully reusable templates for every kind of flask project.
+# Flask
 
-to start:
+Budowa na przykładzie _flask_boilerplate_
 
-mkdir _namedirection_
+-----
 
-git checkout _actualbranch_
-git clone git@github.com:wesolyigor/flask_boilerplate.git .
-rm -rf .git
+*_jeżeli nie uruchamiamy pliku flaska z run.sh lub pycharma to trzeba stworzyć zmienną środowiskową w terminalu na development z production_
 
-./run.sh
+    export FLASK_ENV=development
+
+### to start flask_boilerplate:
+
+    mkdir _namedirection_
+    git checkout _actualbranch_
+    git clone git@github.com:wesolyigor/flask_boilerplate.git .
+    rm -rf .git
+    
+    ./run.sh
+
+alternatywnie każdy plik flaska odpalamy za pomocą 
+`flask run`
