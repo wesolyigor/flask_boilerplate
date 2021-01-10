@@ -12,3 +12,9 @@ class Article(db.Model):
     created = db.Column(db.DateTime, default=datetime.utcnow())
     watched = db.Column(db.Integer, default=0)
 
+
+
+
+
+
+

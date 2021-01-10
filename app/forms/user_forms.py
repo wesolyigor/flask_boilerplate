@@ -18,8 +18,9 @@ class SignUpForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(3, 80), Regexp('^[A-Za-z0-9_]{3,}$',
                                                                                          message='Usernames consist of numbers, letters and underscore.')])
     password = PasswordField('Password',
-                             validators=[DataRequired(), EqualTo('password2', message='Password must match.')])
-    password2 = PasswordField('Confirm Password', validators=[DataRequired()])
+                             validators=[DataRequired(), Length(3, 80),
+                                         EqualTo('password2', message='Password must match.')])
+    password2 = PasswordField('Confirm Password', validators=[DataRequired(), Length(3, 80)])
     submit = SubmitField('Sign Up')
 
     @staticmethod
