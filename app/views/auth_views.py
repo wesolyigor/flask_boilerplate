@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, flash, request, url_for
-from flask_login import login_user, logout_user, login_required, current_user
+from flask_login import login_user, logout_user
 from werkzeug.utils import redirect
 
 from app import db
@@ -12,12 +12,17 @@ bp_auth = Blueprint('auth', __name__, url_prefix='/auth')
 @bp_auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+
     if form.validate_on_submit():
         user = User.get_by_username(form.username.data)
-        if user is not None and user.check_password(form.password.data):
-            login_user(user)
-            flash(f'You are logged in!', 'success')
-            return redirect(request.args.get('next') or url_for('main.home'))
+        if user is None or not user.check_password(form.password.data):
+            flash("Invalid username or password", 'danger')
+            return redirect(url_for("auth.login"))
+
+        login_user(user, remember=form.remember_me.data)
+        flash(f'You are logged in!', 'success')
+        return redirect(request.args.get('next') or url_for('main.home'))
+
     return render_template('login.html', form=form)
 
 
@@ -40,5 +45,3 @@ def logout():
     logout_user()
     flash(f'Logged out!', 'warning')
     return redirect(url_for('main.home'))
-
-
